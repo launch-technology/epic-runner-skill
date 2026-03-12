@@ -1,0 +1,26 @@
+{
+  "skill_name": "epic-runner",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "I want to start working on a new epic for adding user profiles and networking features. Users should be able to view and edit their profiles, see other users' profiles, and connect with each other.",
+      "expected_output": "The skill should enter Phase 1 (Epic Creation), read project docs and existing epics, ask clarifying questions (max 5), and then produce an epic overview document at prds/Epic-4/epic-overview.md with story outlines, design decisions table, and shared context section. It should create a .scrum-state.json file and present the epic for user approval before advancing.",
+      "files": [],
+      "expectations": ["The skill reads existing epics to determine the next epic number", "The skill reads project documentation under /docs/launch77/", "The skill asks clarifying questions before producing the epic document", "The epic overview follows the structure of existing epics (Goal, Design Decisions table, Story Order with brief descriptions, Shared Context)", "Each story outline is 2-4 sentences, not a full story document", "Stories are ordered for incremental delivery with dependencies noted", "The skill stops and asks for user approval before advancing to grooming"]
+    },
+    {
+      "id": 2,
+      "prompt": "Let's groom story 2 for Epic 3",
+      "expected_output": "The skill should enter Phase 2 (Story Grooming), read the Epic 3 overview and all shared context files, read Story 1's implementation plan and the actual built source code, analyze for conflicts and missing behaviors, present findings in two parts (resolved from code + questions for user), and wait for answers before producing a story document following the exact template structure with the Product Owner test applied throughout.",
+      "files": [],
+      "expectations": ["The skill reads prds/Epic-3/epic-overview.md", "The skill reads Story 1's implementation plan JSON", "The skill reads actual source files that Story 1 created or modified", "The skill presents 'What I can resolve from the code' findings", "The skill asks a maximum of 5 questions", "The skill waits for user answers before producing the story document", "The story document uses the correct template with all required sections (Status, Complexity, Context, Deliverability, Scope, Acceptance Criteria, etc.)"]
+    },
+    {
+      "id": 3,
+      "prompt": "I just want to check where things stand with my current work",
+      "expected_output": "The skill should look for .scrum-state.json files across all epic directories, find the most recently active one, and present a status summary showing the epic name, current story, current phase, and a story-by-story status list. Then ask how to proceed.",
+      "files": [],
+      "expectations": ["The skill searches for prds/Epic-*/.scrum-state.json files", "The skill presents a status summary with epic name, current story, current phase", "The skill shows per-story status (completed, in-progress, pending)", "The skill asks how the user wants to proceed"]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "epic-runner",
+  "version": "1.0.0",
+  "description": "Phased scrum development workflow with gated approvals for Claude Code",
+  "author": {
+    "name": "Jonathan Komorek",
+    "url": "https://launch.technology"
+  },
+  "skills": [
+    "./skills/epic-runner/SKILL.md"
+  ]
+}
