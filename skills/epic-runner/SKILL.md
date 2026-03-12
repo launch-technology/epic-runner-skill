@@ -1,13 +1,6 @@
 ---
 name: epic-runner
-description: >
-  Orchestrates an end-to-end scrum development workflow: epic creation with story outlines,
-  story grooming, implementation planning, code implementation, testing, and review/ship.
-  Use this skill whenever the user wants to start a new epic, create user stories, groom
-  a story, generate an implementation plan, implement a story, test their work, or review
-  and push code. Triggers on phrases like "start a new epic", "groom story N", "let's plan",
-  "implement the story", "test this", "push and move on", "next story", "create stories for",
-  or any reference to a scrum-like development workflow.
+description: Orchestrates an end-to-end scrum development workflow: epic creation with story outlines, story grooming, implementation planning, code implementation, testing, and review/ship. Use this skill whenever the user wants to start a new epic, create user stories, groom a story, generate an implementation plan, implement a story, test their work, or review and push code. Triggers on phrases like "start a new epic", "groom story N", "let's plan", "implement the story", "test this", "push and move on", "next story", "create stories for", or any reference to a scrum-like development workflow.
 argument-hint: '[new-epic <topic> | resume [epic-N] | groom <N> | plan | implement | test | review | status]'
 ---
 
