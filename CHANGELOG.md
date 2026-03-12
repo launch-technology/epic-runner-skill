@@ -10,5 +10,4 @@
 - `resume` support with retroactive state inference from existing files
 - Entry points: `new-epic`, `resume`, `groom`, `plan`, `implement`, `test`, `review`, `status`
 - Reference docs for each phase under `references/`
-- State schema documentation
-- Evaluation suite with 3 scenario-based evals
+- State schema documentation with example

@@ -13,7 +13,7 @@ argument-hint: '[new-epic <topic> | resume [epic-N] | groom <N> | plan | impleme
 
 # Scrum Development Workflow
 
-You are orchestrating a phased scrum development workflow for the Founders Groove project.
+You are orchestrating a phased scrum development workflow.
 Each phase has an approval gate — you STOP and wait for the user to approve before advancing.
 
 ## How to Use This Skill
@@ -39,7 +39,7 @@ When entering a phase, always read the corresponding reference file for detailed
 
 ## State File
 
-Every epic tracks its progress in `prds/Epic-N/.scrum-state.json`. Read it at the start
+Every epic tracks its progress in `.epics/Epic-N/.scrum-state.json`. Read it at the start
 of every invocation to understand where the user left off. For the schema, see
 [state-schema.md](references/state-schema.md).
 
@@ -47,7 +47,7 @@ of every invocation to understand where the user left off. For the schema, see
 
 When no epic number is specified:
 
-1. Glob for `prds/Epic-*/.scrum-state.json`
+1. Glob for `.epics/Epic-*/.scrum-state.json`
 2. Read each state file
 3. Find the one with the most recent `updated_at` that is not fully completed
 4. Present it and confirm with the user
@@ -95,10 +95,11 @@ Phase 6: Review & Ship
 3. **Read the reference file** for whichever phase you are entering. The reference files
    contain the detailed instructions — this file is only the router.
 
-4. **Respect existing conventions.** Stories follow the format established in
-   `.claude/commands/groom-story.md`. Implementation plans use the JSON schema from
-   `.claude/commands/prd-to-execution-plan.md`. File naming follows existing patterns
-   in the `prds/` directory.
+4. **Respect existing conventions.** Stories follow the template in
+   [phase-2-story-grooming.md](references/phase-2-story-grooming.md). Implementation
+   plans use the JSON schema from
+   [phase-3-implementation-plan.md](references/phase-3-implementation-plan.md). File
+   naming follows existing patterns in the `.epics/` directory.
 
 5. **One story at a time.** Never groom, plan, or implement multiple stories simultaneously.
 
@@ -127,10 +128,7 @@ Then ask: "How would you like to proceed?"
 
 ## Project Context
 
-This is a Launch77 workspace using Turborepo. The main application is at
-`apps/lean-canvas-builder/` built with Next.js 14, TypeScript, GraphQL, and
-PostgreSQL with Drizzle ORM. The architecture follows a clean Repository → Service → API
-pattern organized into modules under `src/modules/`.
+This is a Launch77 workspace using Turborepo. All applications are created at the root level under `apps/`. The `.epics/` directory contains epic directories (`Epic-N`) with story documents and implementation plans.
 
 For full project documentation, read files under `/docs/launch77/` and
-`apps/lean-canvas-builder/docs/` as needed during each phase.
+`apps/<app-name>/docs/` as needed during each phase.

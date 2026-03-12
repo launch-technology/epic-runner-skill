@@ -8,8 +8,7 @@ Verify the story document exists and is approved (state file
 ## Step 1: Load Context
 
 1. Read all documents under `/docs/launch77/`.
-2. Read `apps/lean-canvas-builder/docs/README.md` and
-   `apps/lean-canvas-builder/docs/launch77/drizzle-api/README.md`.
+2. Read `apps/<app-name>/docs/README.md`.
 3. Read the approved story document (path from state file).
 4. Read the epic overview for design decisions and shared context.
 5. Read ALL implementation plan JSONs from previously completed

@@ -53,8 +53,6 @@ Ask: "Please review the implementation. You can:
 
    ```
    feat(epic-N/story-N): brief description of what was delivered
-
-   Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>
    ```
 
 3. **Push** the feature branch:

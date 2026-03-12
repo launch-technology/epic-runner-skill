@@ -75,7 +75,7 @@ Running `/epic-runner` with no arguments checks for an active epic and shows its
 
 ## State Tracking
 
-Each epic maintains a `.scrum-state.json` file in its directory (`prds/Epic-N/.scrum-state.json`) that tracks:
+Each epic maintains a `.scrum-state.json` file in its directory (`.epics/Epic-N/.scrum-state.json`) that tracks:
 
 - Current story and phase
 - Per-story status (pending, in-progress, completed)
@@ -102,8 +102,6 @@ epic-runner-skill/
 │           ├── phase-5-testing.md
 │           ├── phase-6-review-and-ship.md
 │           └── state-schema.md
-├── evals/
-│   └── evals.json               # Evaluation scenarios
 ├── CHANGELOG.md
 ├── LICENSE
 └── README.md

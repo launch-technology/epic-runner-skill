@@ -1,6 +1,6 @@
 # State File Schema
 
-Location: `prds/Epic-N/.scrum-state.json`
+Location: `.epics/Epic-N/.scrum-state.json`
 
 This file tracks workflow progress for an epic. It is the source of truth for resuming
 work across sessions. Update it at every phase transition.
@@ -9,9 +9,9 @@ work across sessions. Update it at every phase transition.
 
 ```json
 {
-  "epic_number": 3,
-  "epic_title": "Navigation Architecture — Three Workspaces",
-  "epic_dir": "prds/Epic-3",
+  "epic_number": 1,
+  "epic_title": "User Authentication",
+  "epic_dir": ".epics/Epic-1",
   "created_at": "2026-03-06T10:00:00Z",
   "updated_at": "2026-03-06T14:30:00Z",
   "current_story": 2,
@@ -19,18 +19,18 @@ work across sessions. Update it at every phase transition.
   "stories": [
     {
       "number": 1,
-      "title": "FG Workspace Header & Sidebar",
+      "title": "Login and Registration Pages",
       "status": "completed",
-      "story_file": "story-1-fg-workspace-header-and-sidebar.md",
-      "plan_file": "story-1-fg-workspace-header-and-sidebar_implementation_plan.json",
-      "branch": "feature/epic-3-story-1-fg-header-sidebar",
+      "story_file": "STORY-1-login-and-registration-pages.md",
+      "plan_file": "STORY-1-login-and-registration-pages_implementation_plan.json",
+      "branch": "feature/epic-1-story-1-login-and-registration",
       "completed_at": "2026-03-06T12:00:00Z"
     },
     {
       "number": 2,
-      "title": "Org Admin Workspace Chrome",
+      "title": "Password Reset Flow",
       "status": "in-progress",
-      "story_file": "STORY-2-org-admin-workspace-chrome.md",
+      "story_file": "STORY-2-password-reset-flow.md",
       "plan_file": null,
       "branch": null,
       "completed_at": null
@@ -46,7 +46,7 @@ work across sessions. Update it at every phase transition.
 | --------------- | ------ | -------------------------------------------------------------------------------- |
 | `epic_number`   | number | Matches the directory name (`Epic-N`)                                            |
 | `epic_title`    | string | Human-readable title from the epic overview                                      |
-| `epic_dir`      | string | Relative path to epic directory (e.g., `prds/Epic-3`)                            |
+| `epic_dir`      | string | Relative path to epic directory (e.g., `.epics/Epic-3`)                            |
 | `created_at`    | string | ISO 8601 timestamp — when the epic was created                                   |
 | `updated_at`    | string | ISO 8601 timestamp — updated on every state change                               |
 | `current_story` | number | Story number currently being worked on                                           |

@@ -9,8 +9,8 @@ review and reorder them before investing in detailed grooming.
 Before interviewing the user, build your understanding of the project:
 
 1. Read all docs under `/docs/launch77/` to understand platform conventions.
-2. Read app documentation at `apps/lean-canvas-builder/docs/README.md`.
-3. Scan existing epics (`prds/Epic-*/epic-overview.md`) to understand:
+2. Read app documentation at `apps/<app-name>/docs/README.md`.
+3. Scan existing epics (`.epics/Epic-*/epic-overview.md`) to understand:
    - What epic numbers have been used
    - What has already been built
    - What conventions the epic documents follow
@@ -35,9 +35,9 @@ only needs to fill in gaps rather than repeat what the code already tells you.
 
 ## Step 3: Create the Epic Overview
 
-Create `prds/Epic-N/epic-overview.md` where N is the next available epic number.
+Create `.epics/Epic-N/epic-overview.md` where N is the next available epic number.
 
-Follow the exact structure established by existing epics (e.g., Epic-3):
+Follow the exact structure established by existing epics:
 
 ```markdown
 # Epic N: [Title]
@@ -115,7 +115,7 @@ Do NOT proceed until the user approves. If they request changes, revise and re-p
 
 After the user approves the epic overview:
 
-1. Create `prds/Epic-N/.scrum-state.json` with:
+1. Create `.epics/Epic-N/.scrum-state.json` with:
    - All stories listed with status `"pending"`
    - `current_story`: 1
    - `current_phase`: `"grooming"` (ready for the user to start grooming)

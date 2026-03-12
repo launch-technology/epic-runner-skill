@@ -14,7 +14,7 @@ Read these from the state file paths:
 
 Run these checks and report results:
 
-1. **TypeScript**: `npx tsc --noEmit` — no type errors
+1. **TypeScript**: `npm run typecheck` — no type errors
 2. **Lint**: `npm run lint` — no lint errors
 3. **Build**: `npm run build` — build succeeds with no errors
 

@@ -29,7 +29,7 @@ story document.
 
 Read these files from the state file and epic overview:
 
-1. The epic overview file (`prds/Epic-N/epic-overview.md`).
+1. The epic overview file (`.epics/Epic-N/epic-overview.md`).
 2. Every file listed under "Shared Context" in the epic overview.
 3. The story documents and implementation plan JSONs for all previously completed stories
    in this epic (check the state file's `stories` array for file paths).

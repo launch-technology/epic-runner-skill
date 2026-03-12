@@ -15,9 +15,7 @@ Verify that:
 1. Read the implementation plan JSON from the state file path.
 2. Read the story document for acceptance criteria and design decisions.
 3. Read the epic overview for resolved design decisions.
-4. Read the project documentation:
-   - `apps/lean-canvas-builder/docs/launch77/drizzle-api/README.md` — database patterns
-   - `apps/lean-canvas-builder/docs/README.md` — app architecture
+4. Read the project documentation at `apps/<app-name>/docs/README.md`.
 5. For each layer you're about to implement, read 1–2 adjacent existing files to match
    patterns. For example, before creating a new repository, read an existing repository
    in the same or similar module.
@@ -39,83 +37,15 @@ Follow this order. Each layer should be completed and verified before moving to 
 This order respects dependencies — data models must exist before repositories can use them,
 services before resolvers, and so on.
 
-### 1. Data Model Changes
+Work through each section of the implementation plan in dependency order — data models
+before repositories, repositories before services, services before API layer, API before UI.
 
-If the implementation plan has `data_model_changes`:
+For each layer:
 
-- Create or modify Drizzle ORM model files under `src/modules/<module>/data/models/`
-- Follow existing model patterns: `pgTable` definitions, type exports (`$inferSelect`, `$inferInsert`)
-- Run `npm run db:generate` to generate migrations
-- Run `npm run db:migrate` to apply migrations
-- Verify migration success before continuing
-
-### 2. Repository Layer
-
-If the implementation plan has `repository_layer_changes`:
-
-- Create or modify files under `src/modules/<module>/data/repositories/`
-- Follow existing repository patterns:
-  - Singleton export at bottom of file
-  - Typed method signatures
-  - Standard CRUD methods (findAll, findById, create, update, delete)
-  - Drizzle query builder usage
-
-### 3. Service Layer
-
-If the implementation plan has `service_layer_changes`:
-
-- Create or modify files under `src/modules/<module>/services/`
-- Follow existing patterns:
-  - Import repository singleton
-  - Authorization checks where needed
-  - Business logic validation
-  - Singleton export
-
-### 4. API Layer (GraphQL)
-
-If the implementation plan has `api_layer_changes`:
-
-- Create DTOs under `src/modules/<module>/api/dtos/` with TypeGraphQL decorators
-- Create resolvers under `src/modules/<module>/api/resolvers/`
-- Register new resolvers in `src/modules/graphql/schema-svc.ts` if needed
-- Force-import DTOs for serverless bundling (check existing resolvers for the pattern)
-
-### 5. Authorization Changes
-
-If the implementation plan has `authorization_changes`:
-
-- Create or modify policy files under `src/modules/<module>/policies/`
-- Update auth types if needed
-- Follow existing authorization patterns (e.g., `requireOrgAdminOrFGAdmin`)
-
-### 6. UI Changes
-
-If the implementation plan has `ui_changes`:
-
-- Create or modify components following existing patterns in the project
-- Use existing UI primitives from `@/modules/ui` before creating new ones
-- Follow existing component organization:
-  - Shared components: `src/components/shared-workspace/`
-  - Workspace-specific: `src/components/<workspace>-workspace/`
-  - Module-specific: `src/modules/<module>/components/`
-- Create or modify route pages under `src/app/`
-- Follow Next.js App Router conventions (page.tsx, layout.tsx, loading.tsx)
-
-### 7. Routing & Navigation Changes
-
-If the implementation plan has `routing_changes` or `navigation_changes`:
-
-- Create new route directories and page files
-- Update navigation components (sidebar items, header links)
-- Create stub/placeholder pages for "Coming soon" features if needed
-
-### 8. State Management
-
-If the implementation plan has `state_management_changes`:
-
-- Add GraphQL query/mutation strings to appropriate `graphql.ts` files
-- Follow existing patterns for client-side data fetching
-- Use existing hooks and context patterns — avoid introducing new state management tools
+1. Read 1–2 adjacent existing files in the same module to match patterns.
+2. Implement the changes described in the plan for that layer.
+3. Follow the project's existing conventions for file organization, naming, exports, and imports.
+4. Do not introduce new libraries, patterns, or architectural decisions not in the plan.
 
 ## Step 4: Verify Each Layer
 
