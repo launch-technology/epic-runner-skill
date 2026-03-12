@@ -11,7 +11,7 @@
         "source": "github",
         "repo": "launch-technology/epic-runner-skill"
       },
-      "version": "1.0.0",
+      "version": "1.0.1",
       "description": "Phased scrum development workflow with gated approvals for Claude Code"
     }
   ]
