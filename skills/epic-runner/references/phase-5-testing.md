@@ -68,6 +68,22 @@ Definition of Done:
   - [ ] [Story-specific items] — PASS / FAIL
 ```
 
+## Step 5b: Regression Smoke Test
+
+Based on the "Areas This Story Changes" section of the story document, identify the
+adjacent flows most likely to have been accidentally affected by this story's changes.
+
+List them explicitly and tell the user what to check for each:
+
+```
+Regression smoke test (flows adjacent to this story's changes):
+  - [flow name] — [what to verify]
+  - [flow name] — [what to verify]
+```
+
+Do not check off "All previously working flows still work" in the Definition of Done
+until the user confirms each of these flows still works correctly.
+
 ## Step 6: Fix Cycle
 
 If any checks fail:

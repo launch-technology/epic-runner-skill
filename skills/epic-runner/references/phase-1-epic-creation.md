@@ -81,11 +81,20 @@ existing reusable pieces, GraphQL queries, auth/session info, etc.]
 ### Story Outline Rules
 
 - Each story gets 2–4 sentences only — enough to understand scope, not enough to implement.
-- Stories must be independently deliverable — each leaves the app in a coherent state.
+- Stories must be vertical slices — each one spans from UI to data layer and delivers
+  a user-observable behavior that can be manually tested end-to-end. A story that only
+  touches one layer (e.g. "add DB migration", "write helper functions") is NOT a valid
+  story — merge it into the story that uses it.
+- Each story must be independently testable: a QA tester should be able to exercise a
+  real user flow through the feature without needing a subsequent story to be complete.
+- Each story must leave the app in a coherent, shippable state — no broken flows, no
+  dead-end UI that leads nowhere.
 - Note dependencies between stories explicitly.
-- Order for incremental delivery — build foundations first, then features that depend on them.
-- Prefer smaller, focused stories over large ones. If a story touches more than 3–4 distinct
-  user flows, consider splitting it.
+- Order for incremental delivery — thinnest slice of working user value first, then
+  expand scope story by story.
+- A story is too big if it would reasonably take more than one focused coding session
+  to implement. If you suspect that's the case, propose splitting it — describe where
+  the natural seam is and what each half would deliver independently.
 - Include a cleanup/polish story at the end if the epic involves refactoring.
 
 ### Shared Context Section

@@ -48,9 +48,13 @@ the human — they do not populate the story document.
    or feasibility of this story?
 3. Are there user-facing behaviors this story implies that the outline doesn't address?
    (loading states, empty states, error states, edge cases, permission boundaries)
-4. Is this story independently deliverable as written? Does it leave the app in a
-   coherent state for real users?
-5. Is the scope large enough to warrant splitting? Assess by user impact surface —
+4. Is this story a vertical slice? It must deliver user-observable behavior end-to-end
+   (UI → logic → data). If the outline describes only one technical layer (e.g. schema
+   migration, helper functions, API endpoints with no UI) it is NOT a valid story —
+   flag it and propose merging it into the story that surfaces that behavior to users.
+5. Does it leave the app in a coherent, shippable state? A QA tester must be able to
+   exercise a real user flow through this feature without needing a later story first.
+6. Is the scope large enough to warrant splitting? Assess by user impact surface —
    how many distinct user flows does this story change? — not by file count.
 
 **Critical rule:** Do not carry technical findings into the story document.
@@ -81,20 +85,29 @@ Do not produce the story document yet. Wait for answers.
 After receiving answers, produce the story document. Save it to the epic directory.
 Filename: `STORY-[N]-[kebab-case-title].md`
 
+Before writing any section, write the user story statement as a blockquote immediately
+after the title: `> As a [user type], I want [goal] so that [reason].`
+If you cannot write it cleanly in one sentence, that is a signal the story's purpose
+isn't clear enough — resolve it before proceeding.
+
 Use this exact structure:
 
 ```markdown
 # Story [N]: [Title]
 
+> As a [user type], I want [goal] so that [reason].
+
 ## Status
 
 Ready for implementation
 
-## Complexity
+## Deployment Safety
 
-[Small / Medium / Large] — [one sentence rationale based on how many distinct user
-flows are affected and whether the story introduces new user-facing surfaces.
-Do not reference file counts or layer counts — those are implementation concerns.]
+[Does this story require a feature flag to be safely deployed to production before
+all stories in the epic are complete? Answer yes or no, and briefly explain why.
+Example: "No — the new flow is only reachable via a new route that doesn't exist yet."
+Example: "Yes — this modifies the existing sign-in page, which is live for all users.
+A feature flag is needed to gate the new behavior until Story 4 is complete."]
 
 ## Context
 
@@ -104,10 +117,9 @@ No component names, no file paths.]
 
 ## Deliverability
 
-[Explicit statement that this story can be merged and deployed independently.
-If it cannot, explain why and state what mitigation is in place — feature flag,
-intentional stub, etc. If the app will be in a degraded or incomplete state after
-this story merges, state that explicitly so it's a conscious decision.]
+[Will the app be in a coherent, fully working state after this story merges?
+If any existing flow will be degraded, broken, or incomplete — even temporarily —
+state it explicitly here as a conscious decision. If everything is clean, say so.]
 
 ## Scope
 

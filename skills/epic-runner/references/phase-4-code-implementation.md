@@ -22,7 +22,24 @@ Verify that:
 
 ## Step 2: Create Feature Branch
 
-**IMPORTANT**: Always branch from `develop`. Never branch from or merge into `main`.
+**IMPORTANT**: This workflow requires a `develop` branch. Before creating the feature branch:
+
+1. Run `git branch -r` to confirm `origin/develop` exists.
+2. If it does **not** exist, **stop immediately**. Do not branch from `main`. Tell the user:
+
+   > "This workflow requires a `develop` branch. None was found on the remote. Would you
+   > like me to create one from `main`? I'll show you the exact commands before running
+   > anything."
+
+   If the user says yes, show the commands and wait for explicit confirmation before
+   running each one:
+   - `git checkout main && git pull origin main`
+   - `git checkout -b develop`
+   - `git push -u origin develop`
+
+   Do not proceed past this point until `origin/develop` exists and the user confirms.
+
+3. Once confirmed, create the feature branch from `develop`:
 
 ```
 git checkout develop && git pull origin develop

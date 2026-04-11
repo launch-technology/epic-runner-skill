@@ -80,20 +80,38 @@ Guidelines:
 - Follow existing patterns — check adjacent modules before inventing new ones.
 - List any remaining assumptions under `open_questions`.
 
-## Step 4: Approval Gate
+## Step 4: AC Coverage Check
 
-After saving the JSON, present a plain-language summary:
+Before presenting the plan for approval, verify that every acceptance criterion in the
+story document is covered by at least one entry in the plan.
+
+Go through each AC one by one and identify which plan entry (or entries) address it.
+Present the result as a coverage table:
+
+```
+AC Coverage:
+  ✓ [AC text] → covered by: [plan entry or entries]
+  ✗ [AC text] → NOT COVERED
+```
+
+If any AC is not covered, update the plan to add the missing entries before proceeding.
+Do not present an uncovered plan for approval.
+
+## Step 5: Approval Gate
+
+After the coverage check passes, present a plain-language summary:
 
 - High-level changes (bullet list)
 - Data model and migration changes (called out explicitly)
 - Risk assessment items
 - Open questions requiring answers before implementation
+- AC coverage table (from Step 4)
 
 Ask: "Implementation plan saved. Review the summary and the JSON
 file. Approve to start implementation, request changes, or answer
 any open questions."
 
-## Step 5: State File Update
+## Step 6: State File Update
 
 After approval:
 
