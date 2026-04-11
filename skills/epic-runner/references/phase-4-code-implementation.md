@@ -41,9 +41,15 @@ Verify that:
 
 3. Once confirmed, create the feature branch from `develop`:
 
+   > **Note:** Story and plan files written during Phase 2 and Phase 3 live in the working
+   > directory and must be preserved across the branch switch. Stash them first, then restore
+   > after the feature branch is created.
+
 ```
+git stash
 git checkout develop && git pull origin develop
 git checkout -b feature/epic-N-story-N-kebab-title
+git stash pop
 ```
 
 Update the state file with the branch name.

@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.1 — 2026-04-11
+
+### Fixed
+
+- **Phase 4**: Stash working directory changes before switching to `develop` for feature branch creation, then restore with `git stash pop` — prevents dirty tree errors from Phase 2/3 files written before the branch switch
+
 ## 1.1.0 — 2026-04-10
 
 ### Changed
