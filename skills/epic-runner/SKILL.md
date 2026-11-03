@@ -1,7 +1,7 @@
 ---
 name: epic-runner
-description: Orchestrates an end-to-end scrum development workflow: epic creation with story outlines, story grooming, implementation planning, code implementation, testing, and review/ship. Use this skill whenever the user wants to start a new epic, create user stories, groom a story, generate an implementation plan, implement a story, test their work, or review and push code. Triggers on phrases like "start a new epic", "groom story N", "let's plan", "implement the story", "test this", "push and move on", "next story", "create stories for", or any reference to a scrum-like development workflow.
-argument-hint: '[new-epic <topic> | resume [epic-N] | groom <N> | plan | implement | test | review | status]'
+description: Orchestrates an end-to-end scrum development workflow: epic creation with story outlines, story grooming, implementation planning, code implementation, testing, code review, and shipping. Use this skill whenever the user wants to start a new epic, create user stories, groom a story, generate an implementation plan, implement a story, test their work, run a code review, or push and ship code. Triggers on phrases like "start a new epic", "groom story N", "let's plan", "implement the story", "test this", "code review", "ship it", "push and move on", "next story", "create stories for", or any reference to a scrum-like development workflow.
+argument-hint: '[new-epic <topic> | resume [epic-N] | groom <N> | plan | implement | test | code-review | ship | status]'
 ---
 
 # Scrum Development Workflow
@@ -24,7 +24,8 @@ check for an active state file and present the current status.
 | `plan`                           | Enter Phase 3 for current story. Read [phase-3-implementation-plan.md](references/phase-3-implementation-plan.md). |
 | `implement`                      | Enter Phase 4 for current story. Read [phase-4-code-implementation.md](references/phase-4-code-implementation.md). |
 | `test`                           | Enter Phase 5 for current story. Read [phase-5-testing.md](references/phase-5-testing.md).                         |
-| `review`                         | Enter Phase 6 for current story. Read [phase-6-review-and-ship.md](references/phase-6-review-and-ship.md).         |
+| `code-review`                    | Enter Phase 6 for current story. Read [phase-6-code-review.md](references/phase-6-code-review.md).                 |
+| `ship`                           | Enter Phase 7 for current story. Read [phase-7-ship.md](references/phase-7-ship.md).                               |
 | `status`                         | Show status summary for the active epic.                                                                           |
 | _(no arguments)_                 | Read state file if one exists, show status. Otherwise ask what to do.                                              |
 
@@ -58,23 +59,31 @@ If the user runs `resume` on an epic that has existing story/plan files but no s
 ```
 Phase 1: Epic Creation
   └─ GATE: User reviews and approves story outlines (may reorder/split/merge)
+  └─ Creates epic branch from base branch, creates .epics/config.json if needed
 
 Phase 2: Story Grooming (one story at a time)
+  └─ Creates story branch from epic branch
   └─ GATE: User reviews and approves the story document
 
 Phase 3: Implementation Planning
   └─ GATE: User reviews and approves the implementation plan JSON
+  └─ COMMIT: docs(epic-N/story-N) — story document and implementation plan
 
 Phase 4: Code Implementation
   └─ GATE: User confirms implementation is ready for testing
 
 Phase 5: Manual Testing & Fixes
   └─ GATE: User confirms all checks pass
+  └─ COMMIT: feat(epic-N/story-N) — implementation complete
 
-Phase 6: Review & Ship
-  └─ GATE: User decides: request changes → loop back, or push and advance
+Phase 6: Code Review
+  └─ GATE: User approves review findings
+  └─ COMMIT (if changes): fix(epic-N/story-N) — code review feedback
+
+Phase 7: Ship
+  └─ Push, PR description, advance
        └─ If "next story": return to Phase 2 for the next pending story
-       └─ If all stories done: epic complete
+       └─ If all stories done: epic complete (merge epic branch to base branch)
 ```
 
 ## Critical Rules
@@ -119,9 +128,11 @@ Story Status:
 
 Then ask: "How would you like to proceed?"
 
-## Project Context
+## Project Configuration
 
-This is a Launch77 workspace using Turborepo. All applications are created at the root level under `apps/`. The `.epics/` directory contains epic directories (`Epic-N`) with story documents and implementation plans.
+Repository-level settings are stored in `.epics/config.json`. This file is created
+during the first epic (Phase 1) and includes the base branch name. Read it at the
+start of every invocation alongside the state file.
 
-For full project documentation, read files under `/docs/launch77/` and
-`apps/<app-name>/docs/` as needed during each phase.
+The `.epics/` directory contains epic directories (`Epic-N`) with story documents,
+implementation plans, and state files.

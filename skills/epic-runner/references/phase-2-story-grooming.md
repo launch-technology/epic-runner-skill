@@ -25,7 +25,26 @@ story document.
 - The human reviewer is the decision point between phases. Your output gives them what
   they need to make product decisions — not engineering decisions.
 
-## Step 1: Load Context
+## Step 1: Create Story Branch
+
+Before any grooming work begins, create a story branch so all planning artifacts are
+tracked from the start.
+
+1. Read `.epics/config.json` to get the `base_branch` setting.
+2. Get the epic branch name from the state file's `epic_branch` field.
+3. Verify the epic branch exists: `git branch -r | grep origin/[epic-branch]`.
+   If it doesn't exist, stop and tell the user — the epic branch should have been
+   created in Phase 1.
+4. Create the story branch from the epic branch:
+
+   ```
+   git checkout [epic-branch] && git pull origin [epic-branch]
+   git checkout -b feature/epic-N-story-N-kebab-title
+   ```
+
+5. Update the state file: set the current story's `branch` field to the new branch name.
+
+## Step 2: Load Context
 
 Read these files from the state file and epic overview:
 
@@ -37,7 +56,7 @@ Read these files from the state file and epic overview:
    `service_layer_changes`, and `api_layer_changes`. You need to see what was actually
    built, not just what was planned.
 
-## Step 2: Analyze
+## Step 3: Analyze
 
 Read the code to answer these questions internally. Your answers inform what you ask
 the human — they do not populate the story document.
@@ -65,7 +84,7 @@ Translate them first:
 - An existing pattern to follow → omit from the document entirely.
   Phase 3 will discover it by reading the code.
 
-## Step 3: Interview
+## Step 4: Interview
 
 Present your findings in two parts:
 
@@ -80,7 +99,7 @@ structure of the story.
 
 Do not produce the story document yet. Wait for answers.
 
-## Step 4: Produce the Story Document
+## Step 5: Produce the Story Document
 
 After receiving answers, produce the story document. Save it to the epic directory.
 Filename: `STORY-[N]-[kebab-case-title].md`
@@ -214,7 +233,7 @@ If there are no open questions, state:
 "None — all questions were resolved during grooming."]
 ```
 
-## Step 5: Approval Gate
+## Step 6: Approval Gate
 
 After producing the story document, present it to the user and ask:
 
@@ -223,7 +242,7 @@ After producing the story document, present it to the user and ask:
 
 If changes are requested, revise and re-present. Do not advance until approved.
 
-## Step 6: State File Update
+## Step 7: State File Update
 
 After approval:
 
