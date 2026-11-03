@@ -4,20 +4,36 @@ Your goal is to help the user define a new epic with a structured overview and b
 outlines. The outlines should be short enough (2–4 sentences each) that the user can quickly
 review and reorder them before investing in detailed grooming.
 
+## Step 0: Configuration
+
+Check if `.epics/config.json` exists. If it does, read it. If it does not, create it now:
+
+1. Ask the user: "What is the base branch for this project? (e.g., `main`, `develop`, `development`)"
+2. Wait for the answer.
+3. Create `.epics/config.json`:
+
+   ```json
+   {
+     "base_branch": "[user's answer]"
+   }
+   ```
+
+This file is created once per repository and is reused across all epics.
+
 ## Step 1: Context Loading
 
 Before interviewing the user, build your understanding of the project:
 
-1. Read all docs under `/docs/launch77/` to understand platform conventions.
-2. Read app documentation at `apps/<app-name>/docs/README.md`.
-3. Scan existing epics (`.epics/Epic-*/epic-overview.md`) to understand:
+1. Read any project documentation that exists (look for `docs/`, `README.md`, or
+   similar at the project root and in application directories).
+2. Scan existing epics (`.epics/Epic-*/epic-overview.md`) to understand:
    - What epic numbers have been used
    - What has already been built
    - What conventions the epic documents follow
-4. Read the codebase structure to understand current application state:
-   - Route structure under `src/app/`
-   - Module structure under `src/modules/`
-   - Existing components under `src/components/`
+3. Read the codebase structure to understand current application state:
+   - Route/page structure
+   - Module/feature organization
+   - Existing components and shared utilities
 
 ## Step 2: User Interview
 
@@ -120,12 +136,31 @@ Present the epic overview to the user. Explicitly ask:
 
 Do NOT proceed until the user approves. If they request changes, revise and re-present.
 
-## Step 5: State File
+## Step 5: Create Epic Branch
 
 After the user approves the epic overview:
+
+1. Read `base_branch` from `.epics/config.json`.
+2. Verify the base branch exists on the remote: `git branch -r | grep origin/[base_branch]`.
+   If it does not exist, stop and tell the user. Ask if they want to create it or
+   specify a different base branch. Update `.epics/config.json` if they change it.
+3. Create the epic branch from the base branch:
+
+   ```
+   git checkout [base_branch] && git pull origin [base_branch]
+   git checkout -b epic/epic-N-kebab-title
+   git push -u origin epic/epic-N-kebab-title
+   ```
+
+4. Show the user the commands and their output.
+
+## Step 6: State File
+
+After the epic branch is created:
 
 1. Create `.epics/Epic-N/.scrum-state.json` with:
    - All stories listed with status `"pending"`
    - `current_story`: 1
    - `current_phase`: `"grooming"` (ready for the user to start grooming)
-2. Tell the user: "Epic N is set up. Run `/epic-runner groom 1` when you're ready to detail the first story."
+   - `epic_branch`: the epic branch name (e.g., `epic/epic-1-user-authentication`)
+2. Tell the user: "Epic N is set up on branch `[epic-branch]`. Run `/epic-runner groom 1` when you're ready to detail the first story."

@@ -7,13 +7,13 @@ Verify the story document exists and is approved (state file
 
 ## Step 1: Load Context
 
-1. Read all documents under `/docs/launch77/`.
-2. Read `apps/<app-name>/docs/README.md`.
-3. Read the approved story document (path from state file).
-4. Read the epic overview for design decisions and shared context.
-5. Read ALL implementation plan JSONs from previously completed
+1. Read the approved story document (path from state file).
+2. Read the epic overview for design decisions and shared context.
+3. Read any project documentation referenced in `.epics/config.json`
+   or in the epic overview's "Shared Context" section.
+4. Read ALL implementation plan JSONs from previously completed
    stories in this epic — check the state file `stories` array.
-6. Read the actual source files listed in previous plans'
+5. Read the actual source files listed in previous plans'
    `ui_changes`, `service_layer_changes`, `api_layer_changes`,
    and `data_model_changes`. See what was built, not just planned.
 
@@ -111,11 +111,27 @@ Ask: "Implementation plan saved. Review the summary and the JSON
 file. Approve to start implementation, request changes, or answer
 any open questions."
 
-## Step 6: State File Update
+## Step 6: Commit Planning Artifacts
 
-After approval:
+After approval, commit the story document and implementation plan so they are preserved
+on the story branch before implementation begins.
+
+1. Run `git add` for the story document and implementation plan JSON by name.
+   Also add the updated `.scrum-state.json`. Do not use `git add -A` or `git add .`.
+2. Propose a commit message:
+
+   ```
+   docs(epic-N/story-N): story document and implementation plan
+   ```
+
+3. Ask the user to confirm or revise the message.
+4. Commit with the approved message. Show the output.
+
+## Step 7: State File Update
+
+After the commit succeeds:
 
 1. Update `plan_file` in the state file.
 2. Set `current_phase` to `"implementing"`.
 3. Update `updated_at`.
-4. Tell the user: "Run `/epic-runner implement` to start coding."
+4. Tell the user: "Planning committed. Run `/epic-runner implement` to start coding."

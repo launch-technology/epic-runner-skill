@@ -123,14 +123,31 @@ Manual Checks for User:
 ## Step 8: Approval Gate
 
 Ask: "All automated checks pass. Here's what you should verify manually in the browser:
-[list]. Once you've confirmed, let me know and we'll move to final review."
+[list]. Once you've confirmed, let me know and we'll commit and move to code review."
 
 If the user reports issues from their manual testing, fix them and re-run affected checks.
 
-## Step 9: State File Update
+## Step 9: Commit
 
-After the user confirms all tests pass:
+After the user confirms all tests pass, create a commit capturing the implementation work.
 
-1. Set `current_phase` to `"review"`.
+1. Run `git add` for only the files changed during implementation (Phase 4) and any fixes
+   made during this testing phase. Do not use `git add -A` or `git add .` — add files by name.
+2. Propose a commit message:
+
+   ```
+   feat(epic-N/story-N): [brief description of what was delivered]
+   ```
+
+   The message should read as if the developer is saying "this is done, ready for review."
+
+3. Ask the user to confirm or revise the message.
+4. Commit with the approved message. Show the output.
+
+## Step 10: State File Update
+
+After the commit succeeds:
+
+1. Set `current_phase` to `"code-review"`.
 2. Update `updated_at`.
-3. Tell the user: "Testing complete. Run `/epic-runner review` for final review and shipping."
+3. Tell the user: "Implementation committed. Run `/epic-runner code-review` to start the code review."

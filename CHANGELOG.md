@@ -1,5 +1,26 @@
 # Changelog
 
+## 1.2.0 — 2026-11-02
+
+### Added
+
+- **Phase 6: Code Review** — New phase between testing and shipping. Two-pass review: holistic (placement, completeness, missing code, DRY violations, plan adherence, AC traceability with correctness verification, boundary compliance) then per-file (dead code, naming consistency, duplication with existing codebase, error handling at boundaries, hardcoded values, bad precedents). Explicitly skips formatting/style issues that linters handle. DRY violations are weighted as high-priority must-fix items. Findings categorized as must-fix, should-fix, or notes. Creates a separate commit for review fixes (only if changes were made). Review criteria are defined in `phase-6-code-review.md`
+- **Epic branches** — Phase 1 now creates an epic branch from the base branch (`epic/epic-N-title`). Story branches are created from the epic branch instead of directly from the base branch. Story PRs target the epic branch; epic branch merges into base when the epic is complete
+- **Story branches created earlier** — Story branches are now created at the start of Phase 2 (grooming) instead of Phase 4 (implementation), so planning artifacts are tracked from the beginning
+- **Commit after planning** — Phase 3 now commits the story document and implementation plan (`docs(epic-N/story-N): ...`) before implementation begins, preserving planning artifacts on the branch
+- **Commit after testing** — Phase 5 now commits the implementation (`feat(epic-N/story-N): ...`) before code review begins, creating a safe checkpoint that can be returned to if review fixes go wrong
+- **Repository configuration** — `.epics/config.json` stores repo-level settings (starting with `base_branch`). Created during the first epic; reused for all subsequent epics
+
+### Changed
+
+- **Phase numbering** — Old Phase 6 (Review & Ship) is now Phase 7 (Ship). The new Phase 6 is Code Review
+- **Phase 7 (Ship) simplified** — Commit ceremony removed (commits now happen in Phases 3, 5, and 6). Phase 7 only handles: verify branch, push, PR description, and advance to next story
+- **Base branch is configurable** — No longer hardcoded to `develop`. Users are asked for their base branch during first epic creation and the value is stored in `.epics/config.json`
+- **Project-agnostic** — Removed all Launch77/Turborepo-specific references (hardcoded paths like `/docs/launch77/`, `apps/<app-name>/docs/`, `src/app/`, `src/modules/`, `src/components/`). Phase files now reference project documentation generically and read paths from config or epic overview context
+- **Phase 4 (Implementation)** — No longer creates the feature branch (moved to Phase 2). Verifies it is on the correct story branch at the start instead
+- **State schema** — Added `epic_branch` field to state file. Added `code-review` and `shipping` phase values. Removed `review` phase value
+- **SKILL.md** — Updated routing table with `code-review` and `ship` entry points. Removed `review` entry point. Updated phase flow diagram with commit points and branching operations. Replaced Launch77 project context with generic config reference
+
 ## 1.1.1 — 2026-04-11
 
 ### Fixed

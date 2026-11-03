@@ -9,52 +9,21 @@ Verify that:
 
 - The implementation plan JSON exists (check the state file for `plan_file`).
 - The user approved the plan (current phase should be `"implementing"`).
+- You are on the correct story branch (check `git branch --show-current` against the
+  state file's `branch` field for the current story). The branch was created in Phase 2.
 
 ## Step 1: Load Context
 
 1. Read the implementation plan JSON from the state file path.
 2. Read the story document for acceptance criteria and design decisions.
 3. Read the epic overview for resolved design decisions.
-4. Read the project documentation at `apps/<app-name>/docs/README.md`.
+4. Read any project documentation referenced in `.epics/config.json` or in the epic overview's
+   "Shared Context" section.
 5. For each layer you're about to implement, read 1–2 adjacent existing files to match
    patterns. For example, before creating a new repository, read an existing repository
    in the same or similar module.
 
-## Step 2: Create Feature Branch
-
-**IMPORTANT**: This workflow requires a `develop` branch. Before creating the feature branch:
-
-1. Run `git branch -r` to confirm `origin/develop` exists.
-2. If it does **not** exist, **stop immediately**. Do not branch from `main`. Tell the user:
-
-   > "This workflow requires a `develop` branch. None was found on the remote. Would you
-   > like me to create one from `main`? I'll show you the exact commands before running
-   > anything."
-
-   If the user says yes, show the commands and wait for explicit confirmation before
-   running each one:
-   - `git checkout main && git pull origin main`
-   - `git checkout -b develop`
-   - `git push -u origin develop`
-
-   Do not proceed past this point until `origin/develop` exists and the user confirms.
-
-3. Once confirmed, create the feature branch from `develop`:
-
-   > **Note:** Story and plan files written during Phase 2 and Phase 3 live in the working
-   > directory and must be preserved across the branch switch. Stash them first, then restore
-   > after the feature branch is created.
-
-```
-git stash
-git checkout develop && git pull origin develop
-git checkout -b feature/epic-N-story-N-kebab-title
-git stash pop
-```
-
-Update the state file with the branch name.
-
-## Step 3: Implement Layer by Layer
+## Step 2: Implement Layer by Layer
 
 Follow this order. Each layer should be completed and verified before moving to the next.
 This order respects dependencies — data models must exist before repositories can use them,
@@ -70,7 +39,7 @@ For each layer:
 3. Follow the project's existing conventions for file organization, naming, exports, and imports.
 4. Do not introduce new libraries, patterns, or architectural decisions not in the plan.
 
-## Step 4: Verify Each Layer
+## Step 3: Verify Each Layer
 
 After completing each layer (not just at the end):
 
@@ -81,7 +50,7 @@ After completing all layers:
 
 - Run `npm run build` to verify the build succeeds (this also catches type errors)
 
-## Step 5: Implementation Rules
+## Step 4: Implementation Rules
 
 These rules apply throughout:
 
@@ -94,7 +63,7 @@ These rules apply throughout:
 - **No gold-plating.** Implement what the plan says. Do not add features, refactor adjacent
   code, or "improve" things outside the plan's scope.
 
-## Step 6: Progress Report
+## Step 5: Progress Report
 
 After completing implementation, present:
 
@@ -104,7 +73,7 @@ After completing implementation, present:
 4. **Build status** — typecheck and lint results
 5. **Migration status** — if any database changes were made
 
-## Step 7: Approval Gate
+## Step 6: Approval Gate
 
 Ask: "Implementation is complete. Ready to move to testing, or do you want to review
 anything first?"
@@ -112,7 +81,7 @@ anything first?"
 If the user wants to review specific files, show them. If they request changes, apply them
 and re-verify.
 
-## Step 8: State File Update
+## Step 7: State File Update
 
 After the user confirms:
 
