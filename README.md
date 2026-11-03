@@ -76,7 +76,7 @@ Running `/epic-runner` with no arguments checks for an active epic and shows its
   -> Implementation committed to the story branch
 
 /epic-runner code-review
-  -> Diff-based code review against the epic branch
+  -> Review of the implementation commit
   -> Findings categorized as must-fix, should-fix, or notes
   -> Review fixes committed (if any)
 
